@@ -12,12 +12,8 @@ public interface BbsMapper {
 	@Insert("insert into tbl_bbs (bno, title, userid, cont, contfile)"+
 			" values(seq_bbs.nextval, #{title}, #{userid}, #{cont}, #{contfile})")
 	public void create(BbsVO vo);
-
-	//전체 게시물 보기
-	@Select("select * from tbl_bbs")
-	public List<BbsVO> listAll();
 	
-	//페이지당 게시물 보기(1페이지당 10개씩, 10페이지 자르기)
+	//페이지당 게시물 보기(1페이지당 10개씩, 5페이지씩 자르기)
 	@Select("select bno," 
 			+" (case when sysdate - regdate < 1 then '\"new\"' end)||title||(case when rcount = 0 then ' ' when rcount>0 then '['||rcount||']' end) title,"
 			+"userid, regdate, vcount from"
@@ -25,9 +21,9 @@ public interface BbsMapper {
 			+" where rn > (#{page}-1)*10 and rn<=(#{page}*10)")
 	public List<BbsVO> listPage(int page);
 	
+	//전체 게시물 count
+	@Select("select count(bno) cnt from tbl_bbs")
+	public int countAll();
 	
-	//검색
-	@Select("페이징 쿼리문 넣기") 
-	public List<BbsVO> listSearch();
 	
 }

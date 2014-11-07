@@ -71,33 +71,18 @@ public class HomeController {
 	}
 	
 	
-	//전체 게시물 보기
-	@RequestMapping(value="/listAll")
-	public String viewAllList(){
-		
-		//전체 리스트 나오나?? 확인해 보기 
-		service.listAll();
-		return "hanBbs/list";
-	}
 
-	
 	@RequestMapping(value="/listPage")
 	public String viewPageList(@RequestParam(value="page", defaultValue="1") int page, Model model){
 		
 		//addAttribute로 jsp페이지에 "list" 던지기 
 		model.addAttribute("list",service.listPage(page));
-		
-		
+		model.addAttribute("paging", service.paging(page));
+				
 		return "hanBbs/list";
 	}
 	
 	
-	@RequestMapping(value="/listSearch")
-	public String viewSearchList(){
-		
-		service.listSearch();
-		
-		return "hanBbs/list";
-	}
+
 	
 }

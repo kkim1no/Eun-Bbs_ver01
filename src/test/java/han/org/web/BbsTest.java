@@ -2,10 +2,9 @@ package han.org.web;
 
 import javax.inject.Inject;
 
-
-
-
 import org.han.mapper.BbsMapper;
+import org.han.service.BbsService;
+import org.han.utill.PageMaker;
 import org.han.vo.BbsVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +23,9 @@ public class BbsTest {
 	BbsMapper mapper;
 	@Inject
 	BbsVO vo;
+	
+	@Inject 
+	BbsService service;
 	
 	
 	@Test
@@ -46,4 +48,17 @@ public class BbsTest {
 		
 		
 	}
+	
+	
+	
+	@Test
+	public void paging(){
+		
+		
+		PageMaker maker=service.paging(50);
+
+		System.out.println(maker);
+		
+	}
+	
 }
