@@ -1,58 +1,77 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 
-<!-- c(for¹® µî)ÅÂ±×¸¦ ¾²±âÀ§ÇØ ¾Æ·¡¿Í °°ÀÌ ¼±¾ğÇØ ÁÖ¾î¾ß ÇÕ´Ï´Ù. -->    
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- using cTag -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- JavaScript ¼±¾ğ¹® -->
+
+<!-- using JavaScript -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-<title>Insert title here</title>
+<title>Han's Bbs</title>
 </head>
 <body>
 
-List º¸¿©ÁÖ´Â ÆäÀÌÁöÀÔ´Ï´Ù. 
-<div id ="list">
-	<ul>
-		<c:forEach items="${list}" var="list">
-			<li>${list.bno} : ${list.title}</li>
+	<h1>List view Page</h1>
+
+	<!-- new data -->
+	<form action="create">
+		<!-- submit í•˜ë©´ createë¡œ ë„˜ì–´ê° -->
+		<input id="careate_btn" type="submit" , value="Create">
+	</form>
+	<!-- end new data -->
+
+	<!-- list -->
+	<div id="list">
+		<ul>
+			<c:forEach items="${list}" var="list">
+				<li>${list.bno}: ${list.title}: ${list.userid}</li>
+			</c:forEach>
+		</ul>
+	</div>
+	<!-- end list -->
+
+
+	<!-- paging -->
+	<div id="paging">
+
+		<c:choose>
+			<c:when test="${paging.preNum}"></c:when>
+			<c:otherwise>
+				<a href="listPage?page=${paging.preNum}">Prev</a>
+			</c:otherwise>
+		</c:choose>
+
+		<c:forEach var="i" begin="${paging.first}" end="${paging.last}">
+			<a href="listPage?page=${i}">${i}</a>
 		</c:forEach>
-	</ul>
-</div>	
 
+		<c:choose>
+			<c:when test="${paging.nextNum}"></c:when>
+			<c:otherwise>
+				<a href="listPage?page=${paging.nextNum}">Next</a>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<!-- end paging -->
 
-<!-- ÆäÀÌÂ¡ Ã³¸® -->
-<div id ="paging">
+<!-- search -->
+<div id = search>
+<form action="listPage">
 
-<c:choose>
-<c:when test="${paging.preNum}"></c:when>
-<c:otherwise>
-<a href="listPage?page=${paging.preNum}" >ÀÌÀü</a>
-</c:otherwise>
-</c:choose>
+<input name="keyword" type ="text">
+<input id="search_btn" type="submit" value="Search">
 
-<c:forEach var="i" begin="${paging.first}" end="${paging.last}">
- <a href="listPage?page=${i}" >${i}</a>
-</c:forEach>
-
-<c:choose>
-<c:when test="${paging.nextNum}"></c:when>
-<c:otherwise>
-<a href="listPage?page=${paging.nextNum}" >´ÙÀ½</a>
-</c:otherwise>
-</c:choose>
-
-</div>
-
-
-<form action ="create"> <!-- submit ÇÏ¸é create·Î ³Ñ¾î°¨ -->
-<input id="careate_btn" type="submit", value="Create">
 </form>
+</div>
+<!-- end search -->
+
+
 
 </body>
 </html>

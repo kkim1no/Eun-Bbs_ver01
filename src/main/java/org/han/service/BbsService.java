@@ -15,24 +15,25 @@ public class BbsService {
 	@Inject
 	BbsMapper mapper;
 	
-
-	
-	//게시물 등록하기
+	//insert data
 	public void create(BbsVO vo){
 		mapper.create(vo);
 		
 	}
 	
-	//페이지당 List 보기 
+	//view List
 	public List<BbsVO> listPage(int page){
 		return mapper.listPage(page);
+		
+		
 	}
 	
-	//페이징
+	//paginge
 	public PageMaker paging(int page){
 		
 			int cnt=mapper.countAll();
 			PageMaker maker =new PageMaker(page, cnt);
+			
 		return maker;
 	}
 

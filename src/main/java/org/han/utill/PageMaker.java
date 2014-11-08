@@ -2,36 +2,20 @@ package org.han.utill;
 
 public class PageMaker {
 
-	private int page;// 현재 페이지 Num
-	private int cnt; // 전체 데이터 Count
-	private int lineCount;// 한번에 보여 줄 페이지 개수
-	private int perPage; // 한페이지에 보여 줄 게시물 수
+	private int page;// current page Num
+	private int cnt; // All data Count
+	private int lineCount;// view page count
+	private int perPage; // view data count
 
-	private int first;// 첫번째 페이지
-	private int last;// 마지막 페이지
-	private String preNum; // 이전 번호
-	private String nextNum; // 다음 번호
+	private int first;// first view page Num
+	private int last;// last view page Num
+	private String preNum; // previous page Num
+	private String nextNum; // next page Num
 
-	// 생성자, Overloading
-
-	// 전달받은 param이 String 타입일 때 Int type으로 parse
-	public static int getNumber(String str) {
-		try {
-			return Integer.parseInt(str);
-		} catch (Exception e) {
-
-			// 에러가 발생 할 경우 무조건 1을 return
-			return 1;
-		}
-	}
 
 	public PageMaker() {
 		this(1);
 		// public PageMaker(int page)
-	}
-
-	public void setPage(int page) {
-		this.page = page;
 	}
 
 	public PageMaker(int page) {
@@ -39,7 +23,6 @@ public class PageMaker {
 		// public PageMaker(int page, int cnt==0)
 	}
 
-	// param이 String type일 때 getNumber로 형변환
 	public PageMaker(String pageStr) {
 		this(getNumber(pageStr), 0);
 	}
@@ -51,70 +34,70 @@ public class PageMaker {
 
 	public PageMaker(int page, int cnt, int lineCount, int perPage) {
 		super();
-		this.page = page;
-		// Page Number
-		this.cnt = cnt;
-		// Data Count
-		this.lineCount = lineCount;
-		// View Page Count
-		this.perPage = perPage;
-		// Data Count in a page
+		this.page = page; // Page Number
+		this.cnt = cnt; // Data Count
+		this.lineCount = lineCount; // View Page Count
+		this.perPage = perPage; // Data Count in a page
 
 		this.last = (int) (Math.ceil((double) page / lineCount)) * lineCount;
 		this.first = last - (lineCount - 1);
-		// <<1 2 3 4 5>>
+		// <<first 2 3 4 last>>
 
-		this.preNum = testPreNum(first); // 이전 번호
-		this.nextNum = testNextNum(cnt); // 다음 번호
+		this.preNum = testPreNum(first); // previousTag
+		this.nextNum = testNextNum(cnt); // NextTag
 	}
-	
-	// 다음 페이지 생성여부
-	public String testNextNum(int cnt) {
 
-		int last=0;
-		if(cnt<getRowNum()){
-			this.last= (int)Math.ceil(cnt/10)+1;
-			last=this.last;
-		}else{
-		last= (getRowNum()-1)/10;}
-		System.out.println("last: "+last);
-		String nextNum =String.valueOf(last +1);
+	public String testNextNum(int cnt) {
+		//check the last page Num
+		int last = 0;
+		if (cnt < getRowNum()) {
+			this.last = (int) Math.ceil(cnt / 10)+1;
+			last = this.last;
+			
+		} else {
+			last = (getRowNum() - 1) / 10;
+		}
 		
-		//last/5가 0이 아니면 true
-		if (last%5 != 0 ) {
+		// check the NextTag of necessity
+		String nextNum = String.valueOf(last + 1);
+		if (cnt < getRowNum()) {
 			nextNum = "true";
 		}
 		return nextNum;
 	}
 
-	// 이전 페이지 생성여부 확인
+	// check the previousTag of necessity
 	public String testPreNum(int first) {
 		String preNum = String.valueOf(first - 1);
-		// 이전 페이지가 0이면 true던져주기
 		if (preNum.equals("0")) {
 			preNum = "true";
 		}
 		return preNum;
 	}
 
-	// 불러올 게시물 Count 하기
+	// count to view data at one go
 	public int getRowNum() {
-		// Math.ceil 지정 된 수 올림
 		return (((int) (Math.ceil(page / (double) lineCount))) * (perPage * lineCount)) + 1;
 	}
 
-	// 페이지당 첫번째 게시물
+	// count first view data
 	public int getRnFirst() {
 		return getRnLast() - perPage + 1;
 	}
 
-	// 페이지당 마지막 게시물
+	// conut last view data
 	public int getRnLast() {
 		return (page * perPage);
 	}
 
-	
-	
+	// change the type to 'int', if input the param with 'String'
+	public static int getNumber(String str) {
+		try {
+			return Integer.parseInt(str);
+		} catch (Exception e) {
+			return 1;
+		}
+	}
 	
 	// Get_Setter
 	public int getFirst() {
@@ -133,11 +116,14 @@ public class PageMaker {
 		this.last = last;
 	}
 
-	// 현재 페이지
 	public int getPage() {
 		return page;
 	}
 
+	public void setPage(int page) {
+		this.page = page;
+	}
+	
 	public int getCnt() {
 		return cnt;
 	}

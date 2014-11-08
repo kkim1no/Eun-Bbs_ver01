@@ -8,12 +8,12 @@ import org.han.vo.BbsVO;
 
 public interface BbsMapper {
 	
-	//게시물 등록
+	//Create new data
 	@Insert("insert into tbl_bbs (bno, title, userid, cont, contfile)"+
 			" values(seq_bbs.nextval, #{title}, #{userid}, #{cont}, #{contfile})")
 	public void create(BbsVO vo);
 	
-	//페이지당 게시물 보기(1페이지당 10개씩, 5페이지씩 자르기)
+	// if you want change view page count, modify this "(ceil(#{page}/5)*50)+1)"
 	@Select("select bno," 
 			+" (case when sysdate - regdate < 1 then '\"new\"' end)||title||(case when rcount = 0 then ' ' when rcount>0 then '['||rcount||']' end) title,"
 			+"userid, regdate, vcount from"
@@ -21,7 +21,7 @@ public interface BbsMapper {
 			+" where rn > (#{page}-1)*10 and rn<=(#{page}*10)")
 	public List<BbsVO> listPage(int page);
 	
-	//전체 게시물 count
+	//count All data
 	@Select("select count(bno) cnt from tbl_bbs")
 	public int countAll();
 	

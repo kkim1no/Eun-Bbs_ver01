@@ -31,32 +31,22 @@ public class BbsTest {
 	@Test
 	public void createTest() {
 		
-		vo.setCont("김은애 게시판 테스트입니당");
+		vo.setCont("content");
 		vo.setContfile("kim's.img");
-		vo.setTitle("김은애 테스트");
+		vo.setTitle("title");
 		vo.setUserid("han01");
-		
-		mapper.create(vo);
-		
-	}
 
+		mapper.create(vo);
+	}
 	
 	@Test
 	public void listPageTest() {
-		
 		logger.info(mapper.listPage(1).toString());
-		
-		
 	}
-	
-	
 	
 	@Test
 	public void paging(){
-		
-		
 		PageMaker maker=service.paging(50);
-
 		System.out.println(maker);
 		
 	}

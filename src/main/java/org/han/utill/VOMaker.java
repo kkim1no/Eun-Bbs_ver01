@@ -17,7 +17,7 @@ public class VOMaker {
 				
 				ResultSetMetaData mete = rs.getMetaData();
 				int colClount = mete.getColumnCount();
-				System.out.printf("ÄÃ·³¼ö %d \n", colClount);
+				System.out.printf(" %d \n", colClount);
 				
 				for (int i = 1; i <= colClount; i++) {
 					
