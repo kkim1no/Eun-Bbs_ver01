@@ -46,7 +46,7 @@ public class BbsTest {
 	
 	@Test
 	public void paging(){
-		PageMaker maker=service.paging(50);
+		PageMaker maker=service.paging(15);
 		System.out.println(maker);
 		
 	}

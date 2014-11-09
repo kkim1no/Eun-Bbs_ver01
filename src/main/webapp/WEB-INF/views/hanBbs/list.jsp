@@ -43,18 +43,18 @@
 		<c:choose>
 			<c:when test="${paging.preNum}"></c:when>
 			<c:otherwise>
-				<a href="listPage?page=${paging.preNum}">Prev</a>
+				<a href="listPage?page=${paging.preNum}&keyword=${paging.keyword}">Prev</a>
 			</c:otherwise>
 		</c:choose>
 
 		<c:forEach var="i" begin="${paging.first}" end="${paging.last}">
-			<a href="listPage?page=${i}">${i}</a>
+			<a href="listPage?page=${i}&keyword=${paging.keyword}">${i}</a>
 		</c:forEach>
 
 		<c:choose>
 			<c:when test="${paging.nextNum}"></c:when>
 			<c:otherwise>
-				<a href="listPage?page=${paging.nextNum}">Next</a>
+				<a href="listPage?page=${paging.nextNum}&keyword=${paging.keyword}">Next</a>
 			</c:otherwise>
 		</c:choose>
 	</div>

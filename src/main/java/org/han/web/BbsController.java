@@ -1,8 +1,11 @@
 package org.han.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.han.service.BbsService;
+import org.han.utill.PageMaker;
 import org.han.vo.BbsVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,11 +22,12 @@ public class BbsController {
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 	
-	@Inject
-	BbsVO vo;
 
 	@Inject
 	BbsService service;
+	
+	@Inject
+	BbsVO vo;
 	
 	//view create page
 		@RequestMapping(value = "/create")
@@ -43,15 +47,19 @@ public class BbsController {
 		
 
 		@RequestMapping(value="/listPage")
-		public String viewPageList(@RequestParam(value="page", defaultValue="1") int page, Model model){
+		public String viewPageList(@ModelAttribute PageMaker maker, Model model){
 			
-			//addAttribute deliver "list" 
-			model.addAttribute("list",service.listPage(page));
-			model.addAttribute("paging", service.paging(page));
-					
+			List<BbsVO> list= service.listPage(maker.getPage());
+			
+			//addAttribute deliver "list" to view page
+			model.addAttribute("list",list);
+			
+			PageMaker maker1 =new PageMaker(maker.getPage(), list.get(0).getCnt());
+			maker1.setKeyword(maker.getKeyword());
+			
+			model.addAttribute("paging", maker1);
+			
 			return "hanBbs/list";
 		}
-		
-		
-
+	
 }

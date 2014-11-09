@@ -2,8 +2,11 @@ package org.han.utill;
 
 public class PageMaker {
 
+	private String Keyword;
+	
 	private int page;// current page Num
-	private int cnt; // All data Count
+	private int cnt; // All data Count at one
+
 	private int lineCount;// view page count
 	private int perPage; // view data count
 
@@ -14,13 +17,11 @@ public class PageMaker {
 
 
 	public PageMaker() {
-		this(1);
-		// public PageMaker(int page)
+		this(1);		// public PageMaker(int page)
 	}
 
 	public PageMaker(int page) {
-		this(page, 0);
-		// public PageMaker(int page, int cnt==0)
+		this(page, 0);		// public PageMaker(int page, int cnt==0)
 	}
 
 	public PageMaker(String pageStr) {
@@ -28,8 +29,7 @@ public class PageMaker {
 	}
 
 	public PageMaker(int page, int cnt) {
-		this(page, cnt, 5, 10);
-		// PageMaker(int page, int cnt, int lineCount=5, int perPage=10)
+		this(page, cnt, 5, 10);		// PageMaker(int page, int cnt, int lineCount=5, int perPage=10)
 	}
 
 	public PageMaker(int page, int cnt, int lineCount, int perPage) {
@@ -45,6 +45,7 @@ public class PageMaker {
 
 		this.preNum = testPreNum(first); // previousTag
 		this.nextNum = testNextNum(cnt); // NextTag
+		
 	}
 
 	public String testNextNum(int cnt) {
@@ -164,6 +165,14 @@ public class PageMaker {
 	public void setNextNum(String nextNum) {
 		this.nextNum = nextNum;
 	}
+	
+	public String getKeyword() {
+		return Keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		Keyword = keyword;
+	}
 
 	@Override
 	public String toString() {
@@ -172,7 +181,9 @@ public class PageMaker {
 				+ ", getFirst()=" + getFirst() + ", getLast()=" + getLast()
 				+ ", getPage()=" + getPage() + ", getCnt()=" + getCnt()
 				+ ", getLineCount()=" + getLineCount() + ", getPerPage()="
-				+ getPerPage() + "]";
+				+ getPerPage() + ", getPreNum()=" + getPreNum()
+				+ ", getNextNum()=" + getNextNum() + ", getKeyword()="
+				+ getKeyword() + "]";
 	}
 
 }

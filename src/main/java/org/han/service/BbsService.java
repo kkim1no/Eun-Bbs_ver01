@@ -15,6 +15,9 @@ public class BbsService {
 	@Inject
 	BbsMapper mapper;
 	
+	@Inject
+	BbsVO vo;
+	
 	//insert data
 	public void create(BbsVO vo){
 		mapper.create(vo);
@@ -29,13 +32,12 @@ public class BbsService {
 	}
 	
 	//paginge
-	public PageMaker paging(int page){
-		
-			int cnt=mapper.countAll();
-			PageMaker maker =new PageMaker(page, cnt);
-			
-		return maker;
-	}
+//	public PageMaker paging(int page){
+//		
+//		int cnt= vo.getCnt();
+//		PageMaker maker =new PageMaker(page, cnt);
+//			
+//		return maker;
+//	}
 
-	
 }
