@@ -1,4 +1,4 @@
-package org.han.utill;
+package org.han.util;
 
 public interface Criteria {
 

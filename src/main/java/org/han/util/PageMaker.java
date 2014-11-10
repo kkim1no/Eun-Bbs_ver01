@@ -1,8 +1,8 @@
-package org.han.utill;
+package org.han.util;
 
 public class PageMaker {
 
-	private String Keyword;
+	private String keyword;
 	
 	private int page;// current page Num
 	private int cnt; // All data Count at one
@@ -42,12 +42,35 @@ public class PageMaker {
 		this.last = (int) (Math.ceil((double) page / lineCount)) * lineCount;
 		this.first = last - (lineCount - 1);
 		// <<first 2 3 4 last>>
+		
+		
+	}
+	
+//====================================================================	
+	
 
+	public void doExecute(int cnt){
+		
+		this.last = (int) (Math.ceil((double) page / lineCount)) * lineCount;
+		this.first = last - (lineCount - 1);
+		// <<first 2 3 4 last>>
+		
 		this.preNum = testPreNum(first); // previousTag
 		this.nextNum = testNextNum(cnt); // NextTag
 		
 	}
-
+	
+	
+	
+	public String getSql(){
+		
+		if(keyword == null || keyword.length() == 0){
+			return "";
+		}
+		
+		return "where title like'%"+keyword+"%'";
+	}
+	
 	public String testNextNum(int cnt) {
 		//check the last page Num
 		int last = 0;
@@ -81,15 +104,7 @@ public class PageMaker {
 		return (((int) (Math.ceil(page / (double) lineCount))) * (perPage * lineCount)) + 1;
 	}
 
-	// count first view data
-	public int getRnFirst() {
-		return getRnLast() - perPage + 1;
-	}
 
-	// conut last view data
-	public int getRnLast() {
-		return (page * perPage);
-	}
 
 	// change the type to 'int', if input the param with 'String'
 	public static int getNumber(String str) {
@@ -167,23 +182,27 @@ public class PageMaker {
 	}
 	
 	public String getKeyword() {
-		return Keyword;
+		return keyword;
 	}
 
 	public void setKeyword(String keyword) {
-		Keyword = keyword;
+		this.keyword = keyword;
 	}
 
+
+	
 	@Override
 	public String toString() {
-		return "PageMaker [getRowNum()=" + getRowNum() + ", getRnFirst()="
-				+ getRnFirst() + ", getRnLast()=" + getRnLast()
-				+ ", getFirst()=" + getFirst() + ", getLast()=" + getLast()
-				+ ", getPage()=" + getPage() + ", getCnt()=" + getCnt()
-				+ ", getLineCount()=" + getLineCount() + ", getPerPage()="
-				+ getPerPage() + ", getPreNum()=" + getPreNum()
-				+ ", getNextNum()=" + getNextNum() + ", getKeyword()="
-				+ getKeyword() + "]";
+		return "PageMaker [getSql()=" + getSql() + ", getRowNum()="
+				+ getRowNum() + ", getFirst()=" + getFirst() + ", getLast()="
+				+ getLast() + ", getPage()=" + getPage() + ", getCnt()="
+				+ getCnt() + ", getLineCount()=" + getLineCount()
+				+ ", getPerPage()=" + getPerPage() + ", getPreNum()="
+				+ getPreNum() + ", getNextNum()=" + getNextNum()
+				+ ", getKeyword()=" + getKeyword() + "]";
 	}
+
+	
+	
 
 }

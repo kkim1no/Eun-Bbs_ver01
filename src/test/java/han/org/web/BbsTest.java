@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.han.mapper.BbsMapper;
 import org.han.service.BbsService;
-import org.han.utill.PageMaker;
+import org.han.util.PageMaker;
 import org.han.vo.BbsVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,13 +41,17 @@ public class BbsTest {
 	
 	@Test
 	public void listPageTest() {
-		logger.info(mapper.listPage(1).toString());
+
+	
+		PageMaker maker = new PageMaker(10);
+		service.listPage(maker);
+	
 	}
 	
 	@Test
 	public void paging(){
-		PageMaker maker=service.paging(15);
-		System.out.println(maker);
+//		PageMaker maker=service.paging(15);
+//		System.out.println(maker);
 		
 	}
 	

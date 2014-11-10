@@ -1,4 +1,4 @@
-package org.han.utill;
+package org.han.util;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +32,7 @@ public abstract class SqlAgent {
 	      }
 	   }
 	protected abstract void doJob() throws Exception;
-	//ÇÏÀ§Å¬·¡½º¿¡¼­ ¿À¹ö¶óÀÌµå ÇÒ¼ö ÀÖ°Ô protectetdÃ³¸®
+	//ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ò¼ï¿½ ï¿½Ö°ï¿½ protectetdÃ³ï¿½ï¿½
 	
 	private void closeAll() throws Exception{
 

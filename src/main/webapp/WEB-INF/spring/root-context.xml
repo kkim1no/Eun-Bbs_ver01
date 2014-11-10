@@ -14,6 +14,7 @@
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="org.han.service"></context:component-scan>
 	<context:component-scan base-package="org.han.vo"></context:component-scan>
+	<context:component-scan base-package="org.han.util"></context:component-scan>
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<!-- 데이터서버 연결 -->

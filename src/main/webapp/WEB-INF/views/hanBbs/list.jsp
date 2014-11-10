@@ -26,9 +26,12 @@
 	</form>
 	<!-- end new data -->
 
+
 	<!-- list -->
+	${erroeMessage}
 	<div id="list">
 		<ul>
+		
 			<c:forEach items="${list}" var="list">
 				<li>${list.bno}: ${list.title}: ${list.userid}</li>
 			</c:forEach>
@@ -41,30 +44,32 @@
 	<div id="paging">
 
 		<c:choose>
-			<c:when test="${paging.preNum}"></c:when>
+			<c:when test="${maker.preNum}"></c:when>
 			<c:otherwise>
-				<a href="listPage?page=${paging.preNum}&keyword=${paging.keyword}">Prev</a>
+				<a href="list?page=${maker.preNum}&keyword=${maker.keyword}">Prev</a>
 			</c:otherwise>
 		</c:choose>
 
-		<c:forEach var="i" begin="${paging.first}" end="${paging.last}">
-			<a href="listPage?page=${i}&keyword=${paging.keyword}">${i}</a>
+		<c:forEach var="i" begin="${maker.first}" end="${maker.last}">
+			<a href="list?page=${i}&keyword=${maker.keyword}">${i}</a>
 		</c:forEach>
 
 		<c:choose>
-			<c:when test="${paging.nextNum}"></c:when>
+			<c:when test="${maker.nextNum}"></c:when>
 			<c:otherwise>
-				<a href="listPage?page=${paging.nextNum}&keyword=${paging.keyword}">Next</a>
+				<a href="list?page=${maker.nextNum}&keyword=${maker.keyword}">Next</a>
 			</c:otherwise>
 		</c:choose>
 	</div>
 	<!-- end paging -->
+	<br>
+
 
 <!-- search -->
 <div id = search>
-<form action="listPage">
+<form action="list">
 
-<input name="keyword" type ="text">
+<input name="keyword" type ="text" value=${maker.keyword}>
 <input id="search_btn" type="submit" value="Search">
 
 </form>

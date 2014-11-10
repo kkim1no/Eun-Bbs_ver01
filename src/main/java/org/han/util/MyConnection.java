@@ -1,4 +1,4 @@
-package org.han.utill;
+package org.han.util;
 import java.sql.Array;
 import java.sql.Blob;
 import java.sql.CallableStatement;

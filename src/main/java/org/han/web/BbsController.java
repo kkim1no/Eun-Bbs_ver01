@@ -5,7 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.han.service.BbsService;
-import org.han.utill.PageMaker;
+import org.han.util.PageMaker;
 import org.han.vo.BbsVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,26 +40,24 @@ public class BbsController {
 		@RequestMapping(value = "/insert")
 		public String insert(@ModelAttribute BbsVO newPage) {
 			service.create(newPage);
-			return "redirect:listPage";
+			return "redirect:list";
 			//insert후 redirect로 페이지 갱신
 		}
 		
 		
 
-		@RequestMapping(value="/listPage")
-		public String viewPageList(@ModelAttribute PageMaker maker, Model model){
-			
-			List<BbsVO> list= service.listPage(maker.getPage());
+		@RequestMapping(value="/list")
+		public void viewPageList(PageMaker maker, Model model){
 			
 			//addAttribute deliver "list" to view page
-			model.addAttribute("list",list);
-			
-			PageMaker maker1 =new PageMaker(maker.getPage(), list.get(0).getCnt());
-			maker1.setKeyword(maker.getKeyword());
-			
-			model.addAttribute("paging", maker1);
-			
-			return "hanBbs/list";
+			try {
+				model.addAttribute("list",service.listPage(maker));
+			} catch (Exception e) {
+				model.addAttribute("erroeMessage","해당 검색 결과가 없습니다.");	
+				maker.setKeyword("");
+			}
+			model.addAttribute("maker",maker);
+		
 		}
 	
 }
