@@ -8,10 +8,16 @@ import javax.print.attribute.standard.PageRanges;
 import org.han.mapper.BbsMapper;
 import org.han.util.PageMaker;
 import org.han.vo.BbsVO;
+import org.han.web.BbsController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BbsService {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(BbsService.class);
 	
 	@Inject
 	BbsMapper mapper;
@@ -35,6 +41,24 @@ public class BbsService {
 		return list;
 		
 		
+	}
+
+	public BbsVO read(BbsVO bbs) {
+		
+		return mapper.read(bbs.getBno());
+		
+	}
+
+	public void delete(int bno) {
+
+		mapper.delete(bno);
+	}
+
+
+	public void update(BbsVO vo) {
+
+		mapper.update(vo);
+		logger.info(vo.toString());
 	}
 	
 	//paginge

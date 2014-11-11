@@ -68,7 +68,7 @@ public class PageMaker {
 			return "";
 		}
 		
-		return "where title like'%"+keyword+"%'";
+		return "where title like'%"+ keyword +"%'";
 	}
 	
 	public String testNextNum(int cnt) {

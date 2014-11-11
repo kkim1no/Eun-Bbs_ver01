@@ -44,7 +44,12 @@ public class BbsTest {
 
 	
 		PageMaker maker = new PageMaker(10);
-		service.listPage(maker);
+		try {
+			service.listPage(maker);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 	
@@ -52,6 +57,19 @@ public class BbsTest {
 	public void paging(){
 //		PageMaker maker=service.paging(15);
 //		System.out.println(maker);
+		
+	}
+	
+	@Test
+	public void update(){
+		
+		BbsVO vo = new BbsVO();
+		vo.setCont("변해라아아아아아");
+		vo.setBno(505);
+		
+		mapper.update(vo);
+		System.out.println(vo);
+		
 		
 	}
 	

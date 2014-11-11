@@ -33,7 +33,7 @@
 		<ul>
 		
 			<c:forEach items="${list}" var="list">
-				<li>${list.bno}: ${list.title}: ${list.userid}</li>
+				<li>${list.bno}: <a href="read?bno=${list.bno}">${list.title}</a>: ${list.userid}</li>
 			</c:forEach>
 		</ul>
 	</div>

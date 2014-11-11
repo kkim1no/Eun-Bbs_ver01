@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class BbsController {
 	
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(BbsController.class);
 	
 
 	@Inject
@@ -59,5 +59,34 @@ public class BbsController {
 			model.addAttribute("maker",maker);
 		
 		}
+		
+		@RequestMapping(value="/read")
+		public void readPage(@ModelAttribute BbsVO bbs, Model model){
+			model.addAttribute("bbs",service.read(bbs));
+//			없는 페이지 오류 처리해야 함 
+			
+		}
 	
+		@RequestMapping(value="/delete")
+		public String deletePage(@RequestParam int bno){
+			service.delete(bno);
+//			int nextBno= bbs.getBno()-1;
+			return "redirect:list?bno="+1;
+		}
+		
+		@RequestMapping(value="/modify")
+		public String modifyPage(@ModelAttribute BbsVO bbs, Model model){
+			model.addAttribute("bbs",service.read(bbs));
+			
+			return "hanBbs/update";
+		}
+
+		@RequestMapping(value="/update")
+		public String updatePage(@ModelAttribute BbsVO bbs, Model model){
+			logger.info(bbs.toString());
+			service.update(bbs);
+		
+			return "redirect:read?bno="+bbs.getBno();
+		}
+		
 }
